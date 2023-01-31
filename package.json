@@ -1,0 +1,26 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasiostwor/Discord-Bot.git"
+  },
+  "author": "Jan Horodecki",
+  "license": "Creative Commons Zero v1.0 Universal",
+  "bugs": {
+    "url": "https://github.com/Jasiostwor/Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/Jasiostwor/Discord-Bot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
