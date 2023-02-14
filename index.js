@@ -28,29 +28,18 @@ for (const file of commandFiles){
 
 
 // Handling interactions
-client.on(Events.InteractionCreate, async interaction =>{
-    if(!interaction.isChatInputCommand()) return
+const eventPath = path.join(__dirname, 'events')
+const eventFiles = fs.readdirSync(eventPath).filter(file => file.endsWith('.js'))
 
-    const command = interaction.client.commands.get(interaction.commandName)
+for(const file of eventFiles){
+    const filePath = path.join(eventPath, file)
+    const event = require(filePath)
 
-    if(!command){
-        console.error(`No command matching ${interaction.commandName} was found.`)
-        return
+    if (event.once){
+        client.once(event.name, (...args) => event.execute(...args))
+    }else{
+        client.on(event.name, (...args) => event.execute(...args))
     }
-
-    try{
-        await command.execute(interaction)
-    }catch(error){
-        console.error(error)
-        await interaction.reply({ content: 'Wystąpił błąd podczas wykonywania komendy!', ephemeral: true})
-    }
-})
-
-
-
-
-client.once(Events.ClientReady, c => {
-    console.log(`Ready! Logged in as ${c.user.tag}`)
-})
+}
 
 client.login(process.env.TOKEN)
