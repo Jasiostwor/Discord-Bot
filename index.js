@@ -1,5 +1,5 @@
 // Config
-const { token } = require("dotenv").config()
+require("dotenv").config()
 
 // Node native modules
 const fs = require('node:fs')
