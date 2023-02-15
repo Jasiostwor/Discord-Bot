@@ -21,12 +21,12 @@ module.exports = {
                     await interaction.reply(`Kicked ${member} from server!`);
     
                 } catch (error) {
-                    interaction.reply('An error ocured during execution of command!');
+                    await interaction.reply('An error ocured during execution of command!');
                     logger.debug(error);
                 }
             }else{
-                await interaction.reply("You do not have permission to kick users!")
-            }
+                await interaction.reply("You do not have permission to kick users!");
+            };
             
         },
 };

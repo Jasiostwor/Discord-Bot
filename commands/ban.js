@@ -25,8 +25,8 @@ module.exports = {
                     logger.debug(error);
                 }
             }else{
-                await interaction.reply("You do not have permissions to ban users!")
-            }
+                await interaction.reply("You do not have permissions to ban users!");
+            };
            
         },
 };
