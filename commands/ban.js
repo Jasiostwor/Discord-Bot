@@ -13,10 +13,11 @@ module.exports = {
         
     
         async execute(interaction){
-            const member = interaction.options.getMember('user');
 
-            if (member.permissions.has(PermissionsBitField.Flags.KickMembers)){
+            if (interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)){
                 try {
+                    const member = interaction.options.getMember('user');
+
                     await interaction.guild.members.ban(member)
                     await interaction.reply(`Banned ${member} from server!`);
     

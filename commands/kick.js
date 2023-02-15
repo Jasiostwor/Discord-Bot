@@ -13,10 +13,11 @@ module.exports = {
         
     
         async execute(interaction){
-            const member = interaction.options.getMember('user');
-
-            if(member.permissions.has(PermissionsBitField.Flags.KickMembers)){
+            
+            if(interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)){
                 try {
+                    const member = interaction.options.getMember('user');
+
                     await member.kick();
                     await interaction.reply(`Kicked ${member} from server!`);
     
