@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 const logger = require('../modules/logger');
 
 module.exports = {
@@ -13,14 +13,20 @@ module.exports = {
         
     
         async execute(interaction){
-            try {
-                const member = interaction.options.getMember('user');
-                await interaction.guild.members.ban(member)
-                await interaction.reply(`Banned ${member} from server!`);
+            const member = interaction.options.getMember('user');
 
-            } catch (error) {
-                interaction.reply('An error ocured during execution of command!');
-                logger.debug(error);
+            if (member.permissions.has(PermissionsBitField.Flags.KickMembers)){
+                try {
+                    await interaction.guild.members.ban(member)
+                    await interaction.reply(`Banned ${member} from server!`);
+    
+                } catch (error) {
+                    interaction.reply('An error ocured during execution of command!');
+                    logger.debug(error);
+                }
+            }else{
+                await interaction.reply("You do not have permissions to ban users!")
             }
+           
         },
 };
