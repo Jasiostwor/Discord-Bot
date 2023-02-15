@@ -1,11 +1,11 @@
 {
   "name": "discord-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node .",
-    "devRun": "nodemon index.js",
+    "run": "node . | pino-pretty -i pid,hostname -t 'dd-mm-yyyy HH:MM:ss'",
+    "dev": "nodemon index.js | pino-pretty -i pid,hostname -t 'dd-mm-yyyy HH:MM:ss'",
     "DCglobal": "node deploy-commands-globally.js",
     "DClocal": "node deploy-commands-locally.js"
   },
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/Jasiostwor/Discord-Bot#readme",
   "dependencies": {
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "pino": "^7.0.0-rc.9",
+    "pino-pretty": "^9.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
