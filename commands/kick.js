@@ -21,8 +21,9 @@ module.exports = {
             if(interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)){
                 try {
                     const member = interaction.options.getMember('user');
+                    const reason = interaction.options.getString('reason') ?? "No reason provided";
 
-                    await member.kick();
+                    await member.kick(reason);
                     await interaction.reply(`Kicked ${member} from server!`);
     
                 } catch (error) {

@@ -9,6 +9,10 @@ module.exports = {
             option.setName('user')
                 .setDescription('Ban member from server')
                 .setRequired(true)
+        )
+        .addStringOption(option =>
+            option.setName('reason')
+                .setDescription("Ban reason")    
         ),
         
     
@@ -17,8 +21,9 @@ module.exports = {
             if (interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)){
                 try {
                     const member = interaction.options.getMember('user');
+                    const reason = interaction.options.getString('reason') ?? "No reason provided";
 
-                    await interaction.guild.members.ban(member)
+                    await interaction.guild.members.ban(member,{reason: reason})
                     await interaction.reply(`Banned ${member} from server!`);
     
                 } catch (error) {
