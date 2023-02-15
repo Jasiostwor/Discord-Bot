@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node ."
+    "run": "node .",
+    "devRun": "nodemon index.js",
+    "DCglobal": "node deploy-commands-globally.js",
+    "DClocal": "node deploy-commands-locally.js"
   },
   "repository": {
     "type": "git",
