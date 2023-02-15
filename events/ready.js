@@ -8,6 +8,7 @@ module.exports = {
 		client.user.setActivity("Banning guild members", {type: ActivityType.Competing});
 		client.user.setStatus('dnd');
 
+		
 		logger.info(`Ready! Logged in as ${client.user.tag}`);
 	},
 };

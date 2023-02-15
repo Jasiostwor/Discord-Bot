@@ -9,6 +9,10 @@ module.exports = {
             option.setName('user')
                 .setDescription('Kick member from server')
                 .setRequired(true)
+        )
+        .addStringOption(option =>
+            option.setName('reason')
+                .setDescription("Kick reason")
         ),
         
     
@@ -22,8 +26,14 @@ module.exports = {
                     await interaction.reply(`Kicked ${member} from server!`);
     
                 } catch (error) {
-                    await interaction.reply('An error ocured during execution of command!');
-                    logger.debug(error);
+                    if( error.message === "Missing Permissions"){
+                        await interaction.reply('I do not have permissions to do this!');
+                    }else{
+                        await interaction.reply('An error ocured during execution of command!');
+                    }
+
+                    logger.warn(error);
+                    logger.file.warn(error);
                 }
             }else{
                 await interaction.reply("You do not have permission to kick users!");

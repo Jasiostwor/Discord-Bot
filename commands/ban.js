@@ -23,7 +23,8 @@ module.exports = {
     
                 } catch (error) {
                     interaction.reply('An error ocured during execution of command!');
-                    logger.debug(error);
+                    logger.warn(error);
+                    logger.file.warn(error);
                 }
             }else{
                 await interaction.reply("You do not have permissions to ban users!");
