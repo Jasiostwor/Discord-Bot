@@ -1,8 +1,6 @@
 // Config
 require("dotenv").config();
 
-// Custom modules
-// const logger = require('./modules/logger');
 // Node native modules
 const fs = require('node:fs');
 const path = require('node:path');

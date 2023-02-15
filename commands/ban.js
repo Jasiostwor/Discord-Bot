@@ -22,7 +22,12 @@ module.exports = {
                     await interaction.reply(`Banned ${member} from server!`);
     
                 } catch (error) {
-                    interaction.reply('An error ocured during execution of command!');
+                    if( error.message === "Missing Permissions"){
+                        await interaction.reply('I do not have permissions to do this!');
+                    }else{
+                        await interaction.reply('An error ocured during execution of command!');
+                    }
+
                     logger.warn(error);
                     logger.file.warn(error);
                 }
