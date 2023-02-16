@@ -13,7 +13,9 @@ module.exports = {
         .addStringOption(option =>
             option.setName('reason')
                 .setDescription("Kick reason")
-        ),
+        )
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
+        .setDMPermission(false),
         
     
         async execute(interaction){

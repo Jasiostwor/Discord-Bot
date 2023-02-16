@@ -13,7 +13,9 @@ module.exports = {
         .addStringOption(option =>
             option.setName('reason')
                 .setDescription("Ban reason")    
-        ),
+        )
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
+        .setDMPermission(false),
         
     
         async execute(interaction){
