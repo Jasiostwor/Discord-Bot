@@ -6,10 +6,10 @@ module.exports = {
         .setName('clear')
         .setDescription('Delete messages from channel')
         .addNumberOption(option =>
-            option.setName('time')
-                .setDescription('Time in minutes')
+            option.setName('amount')
+                .setDescription('Number of messages to delete')
                 .setRequired(true)
-                
+                .setMaxValue(100)                
         )
         .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages)
         .setDMPermission(false),
