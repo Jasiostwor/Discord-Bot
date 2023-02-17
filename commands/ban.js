@@ -40,7 +40,6 @@ module.exports = {
                 }
             }else{
                 await interaction.reply('You do not have permissions to ban users!');
-            }
-           
+            }           
         },
 };

@@ -3,29 +3,30 @@ const logger = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('kick')
-        .setDescription('Kicks user from server')
+        .setName('timeout')
+        .setDescription('Timeout an user')
         .addUserOption(option =>
             option.setName('user')
-                .setDescription('Kick member from server')
+                .setDescription('Ban member from server')
                 .setRequired(true)
         )
-        .addStringOption(option =>
-            option.setName('reason')
-                .setDescription('Kick reason')
+        .addNumberOption(option =>
+            option.setName('time')
+                .setDescription('Time in minutes')
         )
-        .setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers)
         .setDMPermission(false),
         
     
-        async execute(interaction){            
-            if(interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)){
+        async execute(interaction){
+            if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)){
                 try {
                     const member = interaction.options.getMember('user');
-                    const reason = interaction.options.getString('reason') ?? 'No reason provided';
+                    let time = interaction.options.getNumber('time') ?? 30;
 
-                    await member.kick(reason);
-                    await interaction.reply(`Kicked ${member} from server!`);
+                    time = time * 60 * 60; //to miliseconds
+
+                    member.timeout(time);
     
                 } catch (error) {
                     if( error.message === 'Missing Permissions'){
@@ -38,7 +39,7 @@ module.exports = {
                     logger.file.warn(error);
                 }
             }else{
-                await interaction.reply('You do not have permission to kick users!');
-            }            
+                await interaction.reply('You do not have permissions to timeout users!');
+            }           
         },
 };
