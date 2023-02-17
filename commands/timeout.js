@@ -24,7 +24,7 @@ module.exports = {
                     const member = interaction.options.getMember('user');
                     let time = interaction.options.getNumber('time') ?? 30;
 
-                    time = time * 60 * 60; //to miliseconds
+                    time = time * 60 * 1000; //to miliseconds
 
                     member.timeout(time);
     
