@@ -9,7 +9,8 @@ module.exports = {
             option.setName('amount')
                 .setDescription('Number of messages to delete')
                 .setRequired(true)
-                .setMaxValue(100)                
+                .setMaxValue(100)  
+                .setMinValue(1)              
         )
         .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages)
         .setDMPermission(false),
@@ -18,7 +19,12 @@ module.exports = {
         async execute(interaction){
             if (interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)){
                 try {
-                    /*empty*/
+                    const amount = interaction.options.getNumber('amount');
+
+                    await interaction.channel.bulkDelete(amount)
+                        .then().catch(logger.file);
+
+                    await interaction.reply(`Deleted ${amount} messages`);
                 } catch (error) {
                     if( error.message === 'Missing Permissions'){
                         await interaction.reply('I do not have permissions to do this!');
