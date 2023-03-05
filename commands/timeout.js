@@ -29,6 +29,10 @@ module.exports = {
                     {name:'28d', value: 2419200000},
                 )
         )
+        .addStringOption(option =>
+            option.setName('reason')
+                .setDescription('Timeout reason')
+        )
         .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers)
         .setDMPermission(false),
         
@@ -37,9 +41,10 @@ module.exports = {
             if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)){
                 try {
                     const member = interaction.options.getMember('user');
-                    let time = interaction.options.getNumber('time') ?? 30000;
+                    const time = interaction.options.getNumber('time') ?? 30000;
+                    const reason = interaction.options.getString('reason');
 
-                    await member.timeout(time);
+                    await member.timeout(time, reason);
 
                     await interaction.reply(`Timeouted ${member}`);
                 } catch (error) {
