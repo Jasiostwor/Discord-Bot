@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,25 +19,11 @@ module.exports = {
     
         async execute(interaction){
 
-            if (interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)){
-                try {
-                    const member = interaction.options.getMember('user');
-                    const reason = interaction.options.getString('reason') ?? 'No reason provided';
+            const member = interaction.options.getMember('user');
+            const reason = interaction.options.getString('reason') ?? 'No reason provided';
 
-                    await interaction.guild.members.ban(member,{reason: reason});
-                    await interaction.reply(`Banned ${member} from server!`);
-    
-                } catch (error) {
-                    if( error.message === 'Missing Permissions'){
-                        await interaction.reply('I do not have permissions to do this!');
-                    }else{
-                        await interaction.reply('An error ocured during execution of command!');
-                    }
+            await interaction.guild.members.ban(member,{reason: reason});
+            await interaction.reply(`Banned ${member} from server!`);
 
-                    log.error(error);
-                }
-            }else{
-                await interaction.reply('You do not have permissions to ban users!');
-            }           
         },
 };

@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,26 +17,13 @@ module.exports = {
         .setDMPermission(false),
         
     
-        async execute(interaction){            
-            if(interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)){
-                try {
-                    const member = interaction.options.getMember('user');
-                    const reason = interaction.options.getString('reason') ?? 'No reason provided';
+        async execute(interaction){  
 
-                    await member.kick(reason);
-                    await interaction.reply(`Kicked ${member} from server!`);
-    
-                } catch (error) {
-                    if( error.message === 'Missing Permissions'){
-                        await interaction.reply('I do not have permissions to do this!');
-                    }else{
-                        await interaction.reply('An error ocured during execution of command!');
-                    }
+            const member = interaction.options.getMember('user');
+            const reason = interaction.options.getString('reason') ?? 'No reason provided';
 
-                    log.error(error);
-                }
-            }else{
-                await interaction.reply('You do not have permission to kick users!');
-            }            
+            await member.kick(reason);
+            await interaction.reply(`Kicked ${member} from server!`); 
+
         },
 };

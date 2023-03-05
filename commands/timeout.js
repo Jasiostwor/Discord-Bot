@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,26 +37,14 @@ module.exports = {
         
     
         async execute(interaction){
-            if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)){
-                try {
-                    const member = interaction.options.getMember('user');
-                    const time = interaction.options.getNumber('time') ?? 30000;
-                    const reason = interaction.options.getString('reason');
 
-                    await member.timeout(time, reason);
+            const member = interaction.options.getMember('user');
+            const time = interaction.options.getNumber('time') ?? 30000;
+            const reason = interaction.options.getString('reason');
 
-                    await interaction.reply(`Timeouted ${member}`);
-                } catch (error) {
-                    if( error.message === 'Missing Permissions'){
-                        await interaction.reply('I do not have permissions to do this!');
-                    }else{
-                        await interaction.reply('An error ocured during execution of command!');
-                    }
+            await member.timeout(time, reason);
 
-                    log.error(error);
-                }
-            }else{
-                await interaction.reply('You do not have permissions to timeout users!');
-            }           
+            await interaction.reply(`Timeouted ${member}`); 
+                    
         },
 };

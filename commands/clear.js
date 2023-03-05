@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,25 +16,10 @@ module.exports = {
         
     
         async execute(interaction){
-            if (interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)){
-                try {
-                    const amount = interaction.options.getNumber('amount');
+            const amount = interaction.options.getNumber('amount');
 
-                    await interaction.channel.bulkDelete(amount)
-                        .then().catch(log.error);
+            await interaction.channel.bulkDelete(amount);
 
-                    await interaction.reply(`Deleted ${amount} messages`);
-                } catch (error) {
-                    if( error.message === 'Missing Permissions'){
-                        await interaction.reply('I do not have permissions to do this!');
-                    }else{
-                        await interaction.reply('An error ocured during execution of command!');
-                    }
-
-                    log.error(error);
-                }
-            }else{
-                await interaction.reply('You do not have permissions to delete messages!');
-            }           
+            await interaction.reply(`Deleted ${amount} messages`);        
         },
 };
