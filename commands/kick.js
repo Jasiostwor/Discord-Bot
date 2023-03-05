@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const logger = require('../modules/logger');
+const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -34,8 +34,7 @@ module.exports = {
                         await interaction.reply('An error ocured during execution of command!');
                     }
 
-                    logger.warn(error);
-                    logger.file.warn(error);
+                    log.error(error);
                 }
             }else{
                 await interaction.reply('You do not have permission to kick users!');

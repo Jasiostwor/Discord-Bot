@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const logger = require('../modules/logger');
+const log = require('../modules/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,7 +22,7 @@ module.exports = {
                     const amount = interaction.options.getNumber('amount');
 
                     await interaction.channel.bulkDelete(amount)
-                        .then().catch(logger.file);
+                        .then().catch(log.error);
 
                     await interaction.reply(`Deleted ${amount} messages`);
                 } catch (error) {
@@ -32,8 +32,7 @@ module.exports = {
                         await interaction.reply('An error ocured during execution of command!');
                     }
 
-                    logger.warn(error);
-                    logger.file.warn(error);
+                    log.error(error);
                 }
             }else{
                 await interaction.reply('You do not have permissions to delete messages!');
