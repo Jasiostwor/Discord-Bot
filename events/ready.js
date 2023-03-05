@@ -5,7 +5,7 @@ module.exports = {
     name: Events.ClientReady,
 	once: true,
 	execute(client) {
-		client.user.setActivity("Banning guild members", {type: ActivityType.Competing});
+		client.user.setActivity('Banning guild members', {type: ActivityType.Competing});
 		client.user.setStatus('dnd');
 
 		

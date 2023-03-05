@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { REST, Routes } = require('discord.js');
-const fs = require("node:fs");
+const fs = require('node:fs');
 
 const commands = [];
 
@@ -27,5 +27,5 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
     } catch (error){
         console.error(error);
-    };
+    }
 })();
