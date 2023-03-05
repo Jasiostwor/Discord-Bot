@@ -4,11 +4,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('timeout')
         .setDescription('Timeout an user')
+
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('Ban member from server')
                 .setRequired(true)
         )
+
         .addNumberOption(option =>
             option.setName('time')
                 .setDescription('Time in minutes')
@@ -28,10 +30,12 @@ module.exports = {
                     {name:'28d', value: 2419200000},
                 )
         )
+
         .addStringOption(option =>
             option.setName('reason')
                 .setDescription('Timeout reason')
         )
+        
         .setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers)
         .setDMPermission(false),
         

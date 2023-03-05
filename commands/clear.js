@@ -4,6 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('clear')
         .setDescription('Delete messages from channel')
+
         .addNumberOption(option =>
             option.setName('amount')
                 .setDescription('Number of messages to delete')
@@ -11,6 +12,7 @@ module.exports = {
                 .setMaxValue(100)  
                 .setMinValue(1)              
         )
+        
         .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages)
         .setDMPermission(false),
         

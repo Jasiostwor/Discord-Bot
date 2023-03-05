@@ -4,15 +4,18 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('kick')
         .setDescription('Kicks user from server')
+
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('Kick member from server')
                 .setRequired(true)
         )
+
         .addStringOption(option =>
             option.setName('reason')
                 .setDescription('Kick reason')
         )
+        
         .setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
         .setDMPermission(false),
         
